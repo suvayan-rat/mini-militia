@@ -5,9 +5,16 @@ using Photon.Pun;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public GameObject player;
-    void Spawn()
+    public GameObject playerPrefab;
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float minY;
+    [SerializeField] private float maxY;
+
+
+    private void Start()
     {
-        PhotonNetwork.Instantiate(player.name, Vector2.zero, Quaternion.identity);
+        Vector3 randomPos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        PhotonNetwork.Instantiate(playerPrefab.name, randomPos, Quaternion.identity);
     }
 }

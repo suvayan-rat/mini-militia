@@ -1,64 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-
-using Button = UnityEngine.UI.Button;
-using TMPro;
-using Photon.Realtime;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    public Canvas uiLoading;
-    public Canvas uiLobby;
-
-    public TMP_InputField createRoomName;
-    public TMP_InputField joinRoomName;
-
-    public Button creatRoom;
-    public Button joinRoom;
-
-    //public ScrollView roomList;
-    void Start()
+    
+    private void Start()
     {
-        uiLoading.gameObject.SetActive(true);
-        uiLobby.gameObject.SetActive(false);
+        Connect();
+    }
+
+    private void Connect()
+    {
         PhotonNetwork.ConnectUsingSettings();
-        Debug.Log("Connecting...");
     }
 
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        Debug.Log("Connected");
-        MasterConnected();
+        PhotonNetwork.JoinLobby();
     }
 
-    public void CreateRoom()
+    public override void OnJoinedLobby()
     {
-        PhotonNetwork.CreateRoom(createRoomName.text);
-        Debug.Log("Room created and joined");
-        //RoomOptions 
+        base.OnJoinedLobby();
+        SceneManager.LoadScene("Lobby");
+        Debug.Log("Connected to Lobby");
     }
-
-    public void JoinRoom()
-    {
-        PhotonNetwork.JoinRoom(joinRoomName.text);
-        // check if joined successfully
-        Debug.Log("Room joined");
-    }
-
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        PhotonNetwork.LoadLevel("Gameplay");
-    }
-    void MasterConnected()
-    {
-        uiLoading.gameObject.SetActive(false);
-        uiLobby.gameObject.SetActive(true);
-    }
+  
 }
