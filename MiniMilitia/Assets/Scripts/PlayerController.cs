@@ -7,16 +7,20 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float force;
     Rigidbody2D rb;
+    PhotonView photonView;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update()
     {
-        //if()
-        Move();
+        if (photonView.IsMine)
+        {
+            Move();
+        }
     }
 
     void Move()
