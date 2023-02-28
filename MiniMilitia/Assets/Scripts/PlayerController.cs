@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +6,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float force;
     Rigidbody2D rb;
     PhotonView photonView;
-    
+
+    bool playerIsMovingUp;
+    bool playerIsMovingDown;
+    bool playerIsMovingRight;
+    bool playerIsMovingLeft;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
         if (photonView.IsMine)
         {
             Move();
+            Movement();
         }
     }
 
@@ -27,17 +31,36 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector2.up * force * Time.deltaTime);
+            playerIsMovingUp = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(Vector2.down * force * Time.deltaTime);
+            playerIsMovingDown = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(Vector2.left * force * Time.deltaTime);
+            playerIsMovingLeft = true;
         }
         if (Input.GetKey(KeyCode.D))
+        {
+            playerIsMovingRight = true;
+        }
+    }
+    void Movement()
+    {
+        if (playerIsMovingUp)
+        {
+            rb.AddForce(Vector2.up * force * Time.deltaTime);
+        }
+        if (playerIsMovingDown)
+        {
+            rb.AddForce(Vector2.down * force * Time.deltaTime);
+        }
+        if (playerIsMovingLeft)
+        {
+            rb.AddForce(Vector2.left * force * Time.deltaTime);
+        }
+        if (playerIsMovingRight)
         {
             rb.AddForce(Vector2.right * force * Time.deltaTime);
         }

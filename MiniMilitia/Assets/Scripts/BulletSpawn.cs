@@ -1,12 +1,12 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class BulletSpawn : MonoBehaviourPunCallbacks
+public class BulletSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform gunPos;
-    private PhotonView photonView; 
-    [SerializeField] private PlayerMovement playerMovement;
+    private PhotonView photonView;
+    //[SerializeField] private PlayerMovement playerMovement;
 
     private void Start()
     {
@@ -17,14 +17,14 @@ public class BulletSpawn : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine && Input.GetKeyDown(KeyCode.Space))
         {
-            this.photonView.RPC("SpawnBullet", RpcTarget.All);
+            photonView.RPC("SpawnBullet", RpcTarget.All);
         }
     }
 
     [PunRPC]
     void SpawnBullet()
     {
-        GameObject bullet = Instantiate(bulletPrefab, gunPos.position, Quaternion.identity);
-        bullet.GetComponent<BulletMovement>().isLeft = playerMovement.isFlip;
+         Instantiate(bulletPrefab, gunPos.transform.position, gunPos.transform.rotation);
+        //bullet.GetComponent<BulletMovement>().isLeft = playerMovement.isFlip;
     }
 }

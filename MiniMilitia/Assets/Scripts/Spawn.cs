@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class Spawn : MonoBehaviourPunCallbacks, IPunObservable
 {
-     public GameObject playerPrefab;
+    public GameObject playerPrefab;
     private GameObject player;
     // PhotonView photonView;
     // void Start()

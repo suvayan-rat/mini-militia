@@ -11,21 +11,26 @@ public class BulletMovement : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if(!isLeft)
-        {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
-        }
-        else
-        {
-            transform.Translate(Vector2.left * Time.deltaTime * speed);
-        }
+        //if(!isLeft)
+        //{
+        //    transform.Translate(Vector2.right * Time.deltaTime * speed);
+        //}
+        //else
+        //{
+        //    transform.Translate(Vector2.left * Time.deltaTime * speed);
+        //}
 
-        if (transform.position.x > 10f || transform.position.x < -10f)
-        {
-            Destroy(this.gameObject);
-        }
+        //if (transform.position.x > 10f || transform.position.x < -10f)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+
+        BulletMove();
+    }
+    void BulletMove()
+    {
+        transform.Translate(Vector2.up * Time.deltaTime * speed);
     }
 
-   
 
 }
