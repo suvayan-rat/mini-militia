@@ -20,7 +20,7 @@ public class BulletMovement : MonoBehaviourPunCallbacks
             transform.Translate(Vector2.left * Time.deltaTime * speed);
         }
 
-        if (transform.position.x > 10f || transform.position.x < -10f)
+        if (transform.position.x > 48 || transform.position.x < -48)
         {
             Destroy(this.gameObject);
         }

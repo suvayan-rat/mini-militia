@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     private Vector2 dir;
     public bool isFlip;
     public PlayerHealth playerHealth;
+  
 
 
 
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
    
     private void FixedUpdate()
     {
-        if(photonView.IsMine)
+        if (photonView.IsMine)
             Move();
     }
 
